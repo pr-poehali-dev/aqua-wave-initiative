@@ -1,70 +1,53 @@
-import { Facebook, Instagram, Twitter, Github, Mail, MapPin, Phone } from "lucide-react"
+import { Instagram, Mail, Phone, MessageCircle } from "lucide-react"
 
 const data = {
-  facebookLink: "https://facebook.com/digitalhub",
-  instaLink: "https://instagram.com/digitalhub",
-  twitterLink: "https://twitter.com/digitalhub",
-  githubLink: "https://github.com/digitalhub",
-  services: {
-    web: "/web-razrabotka",
-    mobile: "/mobilnye-prilozheniya",
-    design: "/ui-ux-dizajn",
-    marketing: "/digital-marketing",
+  instaLink: "https://instagram.com/mymind",
+  telegramLink: "https://t.me/mymind",
+  catalog: {
+    hoodies: "#cta",
+    tshirts: "#cta",
+    sweatshirts: "#cta",
+    longsleeves: "#cta",
   },
-  about: {
-    story: "/o-nas",
-    team: "/komanda",
-    portfolio: "/portfolio",
-    careers: "/vakansii",
-  },
-  help: {
-    faqs: "/faq",
-    support: "/podderzhka",
-    blog: "/blog",
+  info: {
+    howItWorks: "#",
+    faq: "#",
+    sizes: "#",
   },
   contact: {
-    email: "hello@digitalhub.ru",
-    phone: "+7 (495) 123-45-67",
-    address: "Москва, Россия",
+    email: "hello@mymind.ru",
+    phone: "+7 (999) 000-00-00",
+    telegram: "@mymind",
   },
   company: {
-    name: "ДиджиталХаб",
+    name: "MYMIND",
     description:
-      "Создаём цифровые продукты, которые помогают бизнесу расти. Веб-разработка, мобильные приложения и дизайн под ключ.",
+      "Одежда, созданная специально для тебя. Выбери готовый дизайн или придумай свой — воплотим идею в реальность.",
   },
 }
 
 const socialLinks = [
-  { icon: Facebook, label: "Facebook", href: data.facebookLink },
   { icon: Instagram, label: "Instagram", href: data.instaLink },
-  { icon: Twitter, label: "Twitter", href: data.twitterLink },
-  { icon: Github, label: "GitHub", href: data.githubLink },
+  { icon: MessageCircle, label: "Telegram", href: data.telegramLink },
 ]
 
-const aboutLinks = [
-  { text: "О нас", href: data.about.story },
-  { text: "Команда", href: data.about.team },
-  { text: "Портфолио", href: data.about.portfolio },
-  { text: "Вакансии", href: data.about.careers },
+const catalogLinks = [
+  { text: "Худи", href: data.catalog.hoodies },
+  { text: "Футболки", href: data.catalog.tshirts },
+  { text: "Свитшоты", href: data.catalog.sweatshirts },
+  { text: "Лонгсливы", href: data.catalog.longsleeves },
 ]
 
-const serviceLinks = [
-  { text: "Веб-разработка", href: data.services.web },
-  { text: "Мобильные приложения", href: data.services.mobile },
-  { text: "UI/UX Дизайн", href: data.services.design },
-  { text: "Digital-маркетинг", href: data.services.marketing },
-]
-
-const helpfulLinks = [
-  { text: "FAQ", href: data.help.faqs },
-  { text: "Поддержка", href: data.help.support },
-  { text: "Блог", href: data.help.blog, hasIndicator: true },
+const infoLinks = [
+  { text: "Как это работает", href: data.info.howItWorks },
+  { text: "FAQ", href: data.info.faq },
+  { text: "Таблица размеров", href: data.info.sizes },
 ]
 
 const contactInfo = [
   { icon: Mail, text: data.contact.email },
   { icon: Phone, text: data.contact.phone },
-  { icon: MapPin, text: data.contact.address, isAddress: true },
+  { icon: MessageCircle, text: data.contact.telegram },
 ]
 
 export default function Footer() {
@@ -190,7 +173,7 @@ export default function Footer() {
 
         .footer-links {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(3, 1fr);
           gap: 40px;
         }
 
@@ -396,7 +379,7 @@ export default function Footer() {
           <div className="footer-grid">
             <div className="footer-brand">
               <div className="brand-logo">
-                <div className="brand-icon">DH</div>
+                <div className="brand-icon">MM</div>
                 <span className="brand-name">{data.company.name}</span>
               </div>
               <p className="brand-description">{data.company.description}</p>
@@ -411,9 +394,9 @@ export default function Footer() {
 
             <div className="footer-links">
               <div className="link-column">
-                <h3>О компании</h3>
+                <h3>Каталог</h3>
                 <ul className="link-list">
-                  {aboutLinks.map(({ text, href }) => (
+                  {catalogLinks.map(({ text, href }) => (
                     <li key={text} className="link-item">
                       <a href={href}>{text}</a>
                     </li>
@@ -422,31 +405,11 @@ export default function Footer() {
               </div>
 
               <div className="link-column">
-                <h3>Услуги</h3>
+                <h3>Информация</h3>
                 <ul className="link-list">
-                  {serviceLinks.map(({ text, href }) => (
+                  {infoLinks.map(({ text, href }) => (
                     <li key={text} className="link-item">
                       <a href={href}>{text}</a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="link-column">
-                <h3>Ресурсы</h3>
-                <ul className="link-list">
-                  {helpfulLinks.map(({ text, href, hasIndicator }) => (
-                    <li key={text} className="link-item">
-                      <a href={href}>
-                        {hasIndicator ? (
-                          <span className="live-indicator">
-                            {text}
-                            <span className="pulse-dot"></span>
-                          </span>
-                        ) : (
-                          text
-                        )}
-                      </a>
                     </li>
                   ))}
                 </ul>
@@ -455,11 +418,11 @@ export default function Footer() {
               <div className="link-column">
                 <h3>Контакты</h3>
                 <ul className="link-list">
-                  {contactInfo.map(({ icon: Icon, text, isAddress }) => (
+                  {contactInfo.map(({ icon: Icon, text }) => (
                     <li key={text} className="link-item">
                       <a href="#" className="contact-item">
                         <Icon className="contact-icon" size={20} />
-                        {isAddress ? <address style={{ fontStyle: "normal" }}>{text}</address> : <span>{text}</span>}
+                        <span>{text}</span>
                       </a>
                     </li>
                   ))}
@@ -470,11 +433,10 @@ export default function Footer() {
 
           <div className="footer-bottom">
             <p className="copyright">
-              2025 <a href="https://poehali.dev">poehali.dev</a>
+              © 2026 MYMIND — Одежда с душой
             </p>
             <div className="footer-legal">
-              <a href="/privacy">Политика конфиденциальности</a>
-              <a href="/terms">Условия использования</a>
+              <a href="#cta">Оставить заявку</a>
             </div>
           </div>
         </div>

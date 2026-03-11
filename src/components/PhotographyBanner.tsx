@@ -5,8 +5,21 @@ const PhotographyBanner: React.FC = () => {
   const [currentText, setCurrentText] = useState("")
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [formSent, setFormSent] = useState(false)
+  const [formData, setFormData] = useState({
+    name: "",
+    contact: "",
+    type: "Футболка",
+    design: "Из каталога",
+    message: "",
+  })
 
-  const texts = ["БИЗНЕС.", "БРЕНДЫ."]
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setFormSent(true)
+  }
+
+  const texts = ["СТИЛЬ.", "СЕБЯ."]
 
   useEffect(() => {
     const typeSpeed = isDeleting ? 40 : 100
@@ -722,7 +735,7 @@ const PhotographyBanner: React.FC = () => {
           color: #fff;
           font-family: "Montserrat", sans-serif;
           font-weight: 700;
-          font-size: clamp(80px, 12vw, 160px);
+          font-size: clamp(60px, 10vw, 130px);
           line-height: 0.8;
           margin: 0 0 30px;
           text-transform: uppercase;
@@ -731,7 +744,7 @@ const PhotographyBanner: React.FC = () => {
         .cta-subtitle {
           color: #d33682;
           font-family: "Montserrat";
-          font-size: 26px;
+          font-size: 22px;
           line-height: 1.6;
           margin: 0 0 50px;
           max-width: 600px;
@@ -739,11 +752,132 @@ const PhotographyBanner: React.FC = () => {
           margin-right: auto;
         }
 
-        .cta-buttons {
+        .order-form {
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(211, 54, 130, 0.3);
+          border-radius: 20px;
+          padding: 50px 40px;
+          text-align: left;
+        }
+
+        .form-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 20px;
+          margin-bottom: 20px;
+        }
+
+        .form-group {
           display: flex;
-          gap: 30px;
-          justify-content: center;
-          flex-wrap: wrap;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .form-group.full-width {
+          grid-column: 1 / -1;
+        }
+
+        .form-group label {
+          font-family: "Montserrat", sans-serif;
+          font-size: 13px;
+          font-weight: 600;
+          color: #d33682;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+          background: rgba(255, 255, 255, 0.07);
+          border: 1px solid #333;
+          border-radius: 10px;
+          padding: 14px 18px;
+          color: #fff;
+          font-family: "Montserrat", sans-serif;
+          font-size: 15px;
+          outline: none;
+          transition: border-color 0.3s ease;
+          width: 100%;
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+          color: #666;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+          border-color: #d33682;
+        }
+
+        .form-select {
+          cursor: pointer;
+          appearance: none;
+          -webkit-appearance: none;
+        }
+
+        .form-select option {
+          background: #002b36;
+          color: #fff;
+        }
+
+        .form-textarea {
+          resize: vertical;
+          min-height: 110px;
+        }
+
+        .form-submit {
+          width: 100%;
+          padding: 18px 40px;
+          background: #d33682;
+          color: #002b36;
+          border: none;
+          font-family: "Montserrat";
+          font-size: 16px;
+          font-weight: bold;
+          text-transform: uppercase;
+          border-radius: 50px;
+          transition: all 0.3s ease;
+          cursor: pointer;
+          margin-top: 10px;
+        }
+
+        .form-submit:hover {
+          background: transparent;
+          color: #d33682;
+          border: 2px solid #d33682;
+          padding: 16px 40px;
+        }
+
+        .form-success {
+          text-align: center;
+          padding: 40px 20px;
+        }
+
+        .form-success h3 {
+          color: #d33682;
+          font-family: "Montserrat";
+          font-size: 28px;
+          margin: 0 0 15px;
+          text-transform: uppercase;
+        }
+
+        .form-success p {
+          color: #aaa;
+          font-family: "Montserrat";
+          font-size: 16px;
+          line-height: 1.8;
+        }
+
+        @media screen and (max-width: 767px) {
+          .form-grid {
+            grid-template-columns: 1fr;
+          }
+          .order-form {
+            padding: 30px 20px;
+          }
         }
 
         .cta-button {
@@ -763,18 +897,6 @@ const PhotographyBanner: React.FC = () => {
         .cta-button:hover {
           background: transparent;
           color: #d33682;
-        }
-
-        .cta-button.secondary {
-          background: transparent;
-          color: #fff;
-          border: 2px solid #fff;
-        }
-
-        .cta-button.secondary:hover {
-          background: transparent;
-          color: #d33682;
-          border: 2px solid #d33682;
         }
 
         @media screen and (max-width: 1199px) {
@@ -828,7 +950,7 @@ const PhotographyBanner: React.FC = () => {
             <div className="left-part">
               <h1>
                 <span className="d-flex">
-                  {["С", "О", "З", "Д", "А", "Ё", "М"].map((char, index) => (
+                  {["M", "Y", "M", "I", "N", "D"].map((char, index) => (
                     <span key={index} className="char tracking-tighter" style={{ animationDelay: `${index * 0.08}s` }}>
                       {char === " " ? "\u00A0" : char}
                     </span>
@@ -837,10 +959,10 @@ const PhotographyBanner: React.FC = () => {
                 <span className="text tracking-tighter">{currentText}</span>
               </h1>
               <p className="tracking-widest">
-                Помогаем предпринимателям запускать цифровые продукты быстрее с помощью современных технологий
+                Одежда, созданная специально для тебя — выбери дизайн из каталога или закажи свой собственный
               </p>
               <a href="#cta" className="book-link">
-                <span className="linktext tracking-tighter text-3xl">Начать проект</span>
+                <span className="linktext tracking-tighter text-3xl">Оставить заявку</span>
                 <span className="arrow">
                   <span></span>
                 </span>
@@ -888,42 +1010,42 @@ const PhotographyBanner: React.FC = () => {
           <section className="features-section">
             <div className="features-container">
               <div className="features-content">
-                <h2>Почему выбирают нас?</h2>
+                <h2>Как это <span className="highlight">работает?</span></h2>
               </div>
               <ul className="features-list">
                 <li className="feature-item">
                   <div className="feature-icon">01</div>
                   <div className="feature-text">
-                    <h3>Опытная команда</h3>
+                    <h3>Выбери дизайн</h3>
                     <p className="font-light tracking-wider">
-                      Более 10 лет опыта в разработке цифровых продуктов для бизнеса любого масштаба
+                      Просмотри каталог готовых дизайнов или опиши свою идею — мы воплотим её в жизнь
                     </p>
                   </div>
                 </li>
                 <li className="feature-item">
                   <div className="feature-icon">02</div>
                   <div className="feature-text">
-                    <h3>Современные технологии</h3>
+                    <h3>Оставь заявку</h3>
                     <p className="tracking-wider">
-                      Используем передовые инструменты и фреймворки для создания быстрых и надёжных решений
+                      Заполни форму с пожеланиями — и мы свяжемся с тобой в ближайшее время
                     </p>
                   </div>
                 </li>
                 <li className="feature-item">
                   <div className="feature-icon">03</div>
                   <div className="feature-text">
-                    <h3>Индивидуальный подход</h3>
+                    <h3>Обсудим детали</h3>
                     <p className="tracking-wider">
-                      Каждый проект уникален — мы адаптируем решения под ваши конкретные задачи и цели
+                      Созвонимся или напишем — уточним размер, материал, цвет и все детали заказа
                     </p>
                   </div>
                 </li>
                 <li className="feature-item">
                   <div className="feature-icon">04</div>
                   <div className="feature-text">
-                    <h3>Поддержка 24/7</h3>
+                    <h3>Получи вещь</h3>
                     <p className="tracking-wider">
-                      Обеспечиваем техническую поддержку и сопровождение на всех этапах работы
+                      Твоя уникальная одежда готова — доставим или встретимся лично
                     </p>
                   </div>
                 </li>
@@ -933,77 +1055,77 @@ const PhotographyBanner: React.FC = () => {
 
           <section className="testimonials-section">
             <div className="testimonials-container">
-              <h2 className="testimonials-title">Отзывы клиентов</h2>
+              <h2 className="testimonials-title">Отзывы</h2>
               <div className="testimonials-marquee">
                 <div className="testimonial-card">
                   <p className="testimonial-quote">
-                    "Команда полностью изменила наш подход к цифровому присутствию. Результаты превзошли все ожидания."
+                    "Заказал худи с собственным принтом — всё сделали именно так, как я хотел. Качество огонь!"
                   </p>
                   <div className="testimonial-author">
-                    <div className="author-avatar">АС</div>
+                    <div className="author-avatar">АК</div>
                     <div className="author-info">
-                      <h4>Алексей Смирнов</h4>
-                      <p>Директор по развитию</p>
+                      <h4>Артём К.</h4>
+                      <p>Кастомный принт на худи</p>
                     </div>
                   </div>
                 </div>
                 <div className="testimonial-card">
                   <p className="testimonial-quote">
-                    "Профессиональный подход и внимание к деталям. Запустили проект в рекордные сроки без потери качества."
+                    "Долго искала где сделать уникальную футболку на подарок. MYMIND — лучшее что нашла. Быстро и красиво."
                   </p>
                   <div className="testimonial-author">
-                    <div className="author-avatar">МК</div>
+                    <div className="author-avatar">АД</div>
                     <div className="author-info">
-                      <h4>Мария Козлова</h4>
-                      <p>Основатель стартапа</p>
+                      <h4>Алина Д.</h4>
+                      <p>Подарочная футболка</p>
                     </div>
                   </div>
                 </div>
                 <div className="testimonial-card">
                   <p className="testimonial-quote">
-                    "От идеи до запуска — всё прошло гладко. Рекомендую всем, кто ценит качество и скорость."
+                    "Крутой подход — списались, обсудили, через несколько дней получил свою вещь. Буду заказывать ещё."
                   </p>
                   <div className="testimonial-author">
-                    <div className="author-avatar">ДВ</div>
+                    <div className="author-avatar">ДМ</div>
                     <div className="author-info">
-                      <h4>Дмитрий Волков</h4>
-                      <p>Предприниматель</p>
+                      <h4>Дима М.</h4>
+                      <p>Оверсайз-футболка</p>
                     </div>
                   </div>
                 </div>
                 <div className="testimonial-card">
                   <p className="testimonial-quote">
-                    "Команда полностью изменила наш подход к цифровому присутствию. Результаты превзошли все ожидания."
+                    "Заказал худи с собственным принтом — всё сделали именно так, как я хотел. Качество огонь!"
                   </p>
                   <div className="testimonial-author">
-                    <div className="author-avatar">АС</div>
+                    <div className="author-avatar">АК</div>
                     <div className="author-info">
-                      <h4>Алексей Смирнов</h4>
-                      <p>Директор по развитию</p>
+                      <h4>Артём К.</h4>
+                      <p>Кастомный принт на худи</p>
                     </div>
                   </div>
                 </div>
                 <div className="testimonial-card">
                   <p className="testimonial-quote">
-                    "Профессиональный подход и внимание к деталям. Запустили проект в рекордные сроки без потери качества."
+                    "Долго искала где сделать уникальную футболку на подарок. MYMIND — лучшее что нашла. Быстро и красиво."
                   </p>
                   <div className="testimonial-author">
-                    <div className="author-avatar">МК</div>
+                    <div className="author-avatar">АД</div>
                     <div className="author-info">
-                      <h4>Мария Козлова</h4>
-                      <p>Основатель стартапа</p>
+                      <h4>Алина Д.</h4>
+                      <p>Подарочная футболка</p>
                     </div>
                   </div>
                 </div>
                 <div className="testimonial-card">
                   <p className="testimonial-quote">
-                    "От идеи до запуска — всё прошло гладко. Рекомендую всем, кто ценит качество и скорость."
+                    "Крутой подход — списались, обсудили, через несколько дней получил свою вещь. Буду заказывать ещё."
                   </p>
                   <div className="testimonial-author">
-                    <div className="author-avatar">ДВ</div>
+                    <div className="author-avatar">ДМ</div>
                     <div className="author-info">
-                      <h4>Дмитрий Волков</h4>
-                      <p>Предприниматель</p>
+                      <h4>Дима М.</h4>
+                      <p>Оверсайз-футболка</p>
                     </div>
                   </div>
                 </div>
@@ -1013,18 +1135,83 @@ const PhotographyBanner: React.FC = () => {
 
           <section className="cta-section" id="cta">
             <div className="cta-container">
-              <h2 className="cta-title text-center">Готовы начать?</h2>
-              <p className="cta-subtitle">
-                Присоединяйтесь к сотням компаний, которые уже трансформировали свой бизнес. Ваш путь к успеху начинается здесь.
+              <h2 className="cta-title text-center">Заявка</h2>
+              <p className="cta-subtitle text-center">
+                Расскажи, что хочешь — и мы свяжемся с тобой
               </p>
-              <div className="cta-buttons">
-                <a href="#" className="cta-button">
-                  Обсудить проект
-                </a>
-                <a href="#" className="cta-button secondary">
-                  Посмотреть кейсы
-                </a>
-              </div>
+              {formSent ? (
+                <div className="order-form">
+                  <div className="form-success">
+                    <h3>Заявка отправлена!</h3>
+                    <p>Мы получили твой запрос и свяжемся с тобой в ближайшее время, чтобы обсудить все детали.</p>
+                  </div>
+                </div>
+              ) : (
+                <form className="order-form" onSubmit={handleSubmit}>
+                  <div className="form-grid">
+                    <div className="form-group">
+                      <label>Имя</label>
+                      <input
+                        className="form-input"
+                        type="text"
+                        placeholder="Как тебя зовут?"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Контакт (телефон / Telegram)</label>
+                      <input
+                        className="form-input"
+                        type="text"
+                        placeholder="+7 999 000-00-00 или @username"
+                        value={formData.contact}
+                        onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Тип вещи</label>
+                      <select
+                        className="form-select"
+                        value={formData.type}
+                        onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+                      >
+                        <option value="Футболка">Футболка</option>
+                        <option value="Худи">Худи</option>
+                        <option value="Свитшот">Свитшот</option>
+                        <option value="Лонгслив">Лонгслив</option>
+                        <option value="Другое">Другое</option>
+                      </select>
+                    </div>
+                    <div className="form-group">
+                      <label>Дизайн</label>
+                      <select
+                        className="form-select"
+                        value={formData.design}
+                        onChange={(e) => setFormData({ ...formData, design: e.target.value })}
+                      >
+                        <option value="Из каталога">Из каталога</option>
+                        <option value="Свой дизайн">Свой дизайн</option>
+                        <option value="Нужна помощь с дизайном">Нужна помощь с дизайном</option>
+                      </select>
+                    </div>
+                    <div className="form-group full-width">
+                      <label>Пожелания</label>
+                      <textarea
+                        className="form-textarea"
+                        placeholder="Опиши свою идею, размер, цвет или прикрепи референсы..."
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      />
+                    </div>
+                  </div>
+                  <button type="submit" className="form-submit">
+                    Отправить заявку
+                  </button>
+                </form>
+              )}
             </div>
           </section>
         </main>
